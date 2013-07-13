@@ -1,0 +1,36 @@
+# Project: danbo_project
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = opengl_win32_glew_freeimage_glm_private.res
+OBJ  = danbo.o string.o $(RES)
+LINKOBJ  = danbo.o string.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -lbgi -lcomdlg32 -luuid -loleaut32 -lole32 -lgdi32 -lopengl32 -lglu32 -lglaux -lmingw32  -lglut32  -lwinmm  -lglew32 -lfreeimage -mwindows -lopengl32 -lglu32 C:/Dev-Cpp/bin/glew32.dll -lFreeImage  
+INCS =  -I"C:/Dev-Cpp/include"  -I"C:/Dev-Cpp/include/GL" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include/GL"  -I"C:/Dev-Cpp/include" 
+BIN  = danbo.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before danbo.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "danbo.exe" $(LIBS)
+
+danbo.o: danbo.cpp
+	$(CPP) -c danbo.cpp -o danbo.o $(CXXFLAGS)
+
+string.o: string.cpp
+	$(CPP) -c string.cpp -o string.o $(CXXFLAGS)
+
+opengl_win32_glew_freeimage_glm_private.res: opengl_win32_glew_freeimage_glm_private.rc 
+	$(WINDRES) -i opengl_win32_glew_freeimage_glm_private.rc --input-format=rc -o opengl_win32_glew_freeimage_glm_private.res -O coff 
